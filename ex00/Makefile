@@ -6,11 +6,11 @@
 #    By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 18:10:38 by nechaara          #+#    #+#              #
-#    Updated: 2024/10/25 14:08:42 by nechaara         ###   ########.fr        #
+#    Updated: 2024/10/25 14:25:46 by nechaara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = poly
+NAME = bureaucrat
 
 SRCS = main.cpp Bureaucrat.cpp
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
