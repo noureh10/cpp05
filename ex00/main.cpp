@@ -6,7 +6,7 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:05:38 by nechaara          #+#    #+#             */
-/*   Updated: 2024/10/25 16:32:53 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:22:45 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,25 @@
 
 int main(void) {
 	{
+		try {
+			Bureaucrat Bureaucrat("Mister Too Low", 151);
+		} catch (std::exception & e) {
+			std::cout << "Passing through exception\n" << e.what() << std::endl;
+		}
+	}
+	{
+		try {
+			Bureaucrat Bureaucrat("Mister Too High", 0);
+		} catch (std::exception & e) {
+			std::cout << "Passing through exception\n" << e.what() << std::endl;
+		}
+	}
+	{
 		Bureaucrat Bureaucrat("Henry", 150);
 
 		try {
-			Bureaucrat.incrementGrade();
-		} catch (const std::exception &e) {
+			Bureaucrat.decrementGrade();
+		} catch (std::exception & e) {
 			std::cout << "Passing through exception\n" << e.what() << std::endl;
 		}
 	}
@@ -26,9 +40,9 @@ int main(void) {
 		Bureaucrat Bureaucrat("Henry", 1);
 
 		try {
-			Bureaucrat.decrementGrade();
-		} catch (const std::exception &e) {
-			std::cout << "Passing through exception\n" << e.what() << std::endl;
+			Bureaucrat.incrementGrade();
+		} catch (std::exception &e) {
+			std::cout << "Passing through exception\n" << e.what () << std::endl;
 		}
 	}
 	{

@@ -6,7 +6,7 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:09:31 by nechaara          #+#    #+#             */
-/*   Updated: 2024/10/25 16:16:58 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:22:59 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 #define BUREAUCRAT_HPP
 
 #include <iostream>
-#define MIN_GRADE 1
-#define MAX_GRADE 150
-
+#define MAX_GRADE 1
+#define MIN_GRADE 150
 
 class Bureaucrat {
 	private:

@@ -6,16 +6,16 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:24:25 by nechaara          #+#    #+#             */
-/*   Updated: 2024/10/25 16:31:14 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:15:55 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : _name(name), _grade(grade) {
-	if (grade < MIN_GRADE)
+	if (grade > MIN_GRADE)
 		throw GradeTooLowException();
-	else if (grade > MAX_GRADE)
+	else if (grade < MAX_GRADE)
 		throw GradeTooHighException();
 }
 
@@ -39,15 +39,15 @@ unsigned int Bureaucrat::getGrade(void) const {
 }
 
 void Bureaucrat::incrementGrade(void) {
-	if (this->_grade + 1 > MAX_GRADE)
+	if (this->_grade - 1 < MAX_GRADE)
 		throw GradeTooHighException();
-	this->_grade++;
+	this->_grade--;
 }
 
 void Bureaucrat::decrementGrade() {
-	if (this->_grade - 1 < MIN_GRADE)
+	if (this->_grade + 1 > MIN_GRADE)
 		throw GradeTooLowException();
-	this->_grade--;
+	this->_grade++;
 }
 
 const char* Bureaucrat::GradeTooHighException::what(unsigned int grade) const throw() {
