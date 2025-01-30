@@ -6,20 +6,22 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:24:25 by nechaara          #+#    #+#             */
-/*   Updated: 2024/10/25 17:27:09 by nechaara         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:16:31 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : _name(name), _grade(grade) {
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade) {
 	if (grade > MIN_GRADE)
 		throw GradeTooLowException();
 	else if (grade < MAX_GRADE)
 		throw GradeTooHighException();
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& copy) : _name(copy._name), _grade(copy._grade) {}
+Bureaucrat::Bureaucrat(const Bureaucrat& copy) : _name(copy._name), _grade(copy._grade) {
+	*this = copy;
+}
 
 Bureaucrat::~Bureaucrat() {}
 
@@ -50,14 +52,12 @@ void Bureaucrat::decrementGrade() {
 	this->_grade++;
 }
 
-const char* Bureaucrat::GradeTooHighException::what(unsigned int grade) const throw() {
-	std::string errorMessage = "The number " + unsignedIntToString(grade) + "is too high";
-	return (errorMessage.c_str());
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
+	return ("Grade is too high, aborting");
 }
 
-const char* Bureaucrat::GradeTooLowException::what(unsigned int grade) const throw () {
-	std::string errorMessage = "The number " + unsignedIntToString(grade) + "is too low";
-	return (errorMessage.c_str());
+const char* Bureaucrat::GradeTooLowException::what() const throw () {
+	return ("Grade is too low, aborting");
 }
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& Bureaucrat) {
