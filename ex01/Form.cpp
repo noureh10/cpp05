@@ -6,44 +6,51 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 17:37:36 by nechaara          #+#    #+#             */
-/*   Updated: 2024/10/26 18:25:09 by nechaara         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:14:21 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
-Form::Form(const std::string name, const unsigned int signature_grade, const unsigned int execution_grade) : 
-    _name(name), _signature_grade(signature_grade), _execution_grade(execution_grade) {
-        
+Form::Form(const std::string name, const unsigned int signature_grade, const unsigned int execution_grade) {
+	if (signature_grade < MAX_GRADE || execution_grade << MAX_GRADE)
+		throw GradeTooHighException();
+	else if (signature_grade > MIN_GRADE || execution_grade >> MIN_GRADE)
+		throw GradeTooLowException();
+	signature = false;
 }
 
-Form::Form(const Form& copy) : _name(copy._name), _signature_grade(copy._signature_grade), _execution_grade(copy._execution_grade) {
-    
-}
+// Form::Form(const Form& copy)  {
+//     *this = copy;
+// }
 
 Form::~Form() {}
 
 Form& Form::operator=(const Form& rhs) {
-    if (this != &rhs) {
-        this->signature = rhs.signature;
-    }
-    return (*this);
+	if (this != &rhs) {
+		this->signature = rhs.signature;
+	}
+	return (*this);
 }
 
 std::string Form::getName(void) const {
-    return (this->_name);
+	return (this->_name);
 }
 
 bool Form::getSignature(void) const {
-    return (this->signature);
+	return (this->signature);
 }
 
-const char* Bureaucrat::GradeTooHighException::what(unsigned int grade) const throw() {
-	std::string errorMessage = "The number " + unsignedIntToString(grade) + "is too high";
-	return (errorMessage.c_str());
+void Form::beSigned(const Bureaucrat& bureaucrat) {
+	if (bureaucrat.getGrade() > _signature_grade)
+		throw GradeTooLowException();
+	signature = true;
 }
 
-const char* Bureaucrat::GradeTooLowException::what(unsigned int grade) const throw () {
-	std::string errorMessage = "The number " + unsignedIntToString(grade) + "is too low";
-	return (errorMessage.c_str());
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
+	return ("Grade is too high");
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw () {
+	return ("Grade is too low");
 }

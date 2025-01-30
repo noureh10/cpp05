@@ -6,7 +6,7 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:09:31 by nechaara          #+#    #+#             */
-/*   Updated: 2024/10/25 17:22:59 by nechaara         ###   ########.fr       */
+/*   Updated: 2025/01/25 15:06:30 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Bureaucrat {
 		unsigned int _grade;
 
 	public:
-		Bureaucrat(const std::string name, unsigned int grade);
+		Bureaucrat(const std::string name, int grade);
 		Bureaucrat(const Bureaucrat &copy);
 		~Bureaucrat();
 		Bureaucrat& operator=(const Bureaucrat& rhs);
@@ -31,13 +31,14 @@ class Bureaucrat {
 		unsigned int getGrade(void) const;
 		void incrementGrade(void);
 		void decrementGrade(void);
+		void signForm(Form& form);
 		class GradeTooHighException : public std::exception {
 			public:
-				virtual const char* what(unsigned int grade) const throw();
+				virtual const char* what() const throw();
 		};
 		class GradeTooLowException : public std::exception {
 			public:
-				virtual const char* what(unsigned int grade) const throw();
+				virtual const char* what() const throw();
 		};
 };
 
