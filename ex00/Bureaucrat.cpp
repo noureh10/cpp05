@@ -13,6 +13,7 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade) {
+	std::cout << "Constructor called" << "\n";
 	if (grade > MIN_GRADE)
 		throw GradeTooLowException();
 	else if (grade < MAX_GRADE)
@@ -20,7 +21,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& copy) : _name(copy._name), _grade(copy._grade) {
-	*this = copy;
+	std::cout << "Copy constructor called" << "\n";
 }
 
 Bureaucrat::~Bureaucrat() {}
