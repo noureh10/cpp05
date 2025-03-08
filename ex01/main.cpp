@@ -11,64 +11,63 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main(void) {
 	{
 		try {
-			Bureaucrat Bureaucrat("Mister Too Low", 151);
-		} catch (Bureaucrat::GradeTooLowException &e) {
-			std::cout << "Passing through exception\n" << e.what() << std::endl;
+			Form form("Form 1", 0, 50);
+		} catch (Form::GradeTooHighException &e) {
+			std::cout << "Exception caught: " << e.what() << std::endl;
 		}
 	}
 	{
 		try {
-			Bureaucrat Bureaucrat("Mister Too High", 0);
-		} catch (Bureaucrat::GradeTooHighException &e) {
-			std::cout << "Passing through exception\n" << e.what() << std::endl;
+			Form form("Form 2", 151, 50);
+		} catch (Form::GradeTooLowException &e) {
+			std::cout << "Exception caught: " << e.what() << std::endl;
 		}
 	}
 	{
-		Bureaucrat Bureaucrat("Henry", 150);
-
 		try {
-			Bureaucrat.decrementGrade();
-		} catch (Bureaucrat::GradeTooLowException &e) {
-			std::cout << "Passing through exception\n" << e.what() << std::endl;
+			Form form("Form 3", 50, 0);
+		} catch (Form::GradeTooHighException &e) {
+			std::cout << "Exception caught: " << e.what() << std::endl;
 		}
 	}
 	{
-		Bureaucrat Bureaucrat("Henry", 1);
-
 		try {
-			Bureaucrat.incrementGrade();
-		} catch (Bureaucrat::GradeTooHighException &e) {
-			std::cout << "Passing through exception\n" << e.what() << std::endl;
+			Form form("Form 4", 50, 151);
+		} catch (Form::GradeTooLowException &e) {
+			std::cout << "Exception caught: " << e.what() << std::endl;
 		}
 	}
 	{
-		Bureaucrat Bureaucrat("Henry", 25);
-		std::cout << Bureaucrat << std::endl;
-	}
-	{
-		Bureaucrat idiot1("Jean", 144);
-		Bureaucrat idiot2("Mary", 25);
-		idiot1 = idiot2;
-		std::cout << idiot1 << std::endl;
-		
-	}
-	{
-		int grade;
-		grade = 15000;
+		Bureaucrat john("John", 30);
+		Form form("Form 5", 40, 50);
+		std::cout << form << std::endl;
 		try {
-			Bureaucrat Bureaucrat("Henry", grade);
-		} catch (Bureaucrat::GradeTooLowException &e) {
-			std::cout << "Passing through exception\n" << e.what() << std::endl;
-		}
-		grade = -2000;
-		try {
-			Bureaucrat Bureaucrat("Henry", -2000);
-		} catch (Bureaucrat::GradeTooHighException &e) {
-			std::cout << "Passing through exception\n" << e.what() << std::endl;
+			form.beSigned(john);
+			std::cout << "John successfully signed the form." << std::endl;
+		} catch (Form::GradeTooLowException &e) {
+			std::cout << "John couldn't sign the form: " << e.what() << std::endl;
 		}
 	}
+	{
+		Bureaucrat alice("Alice", 50);
+		Form form("Form 6", 40, 50);
+		std::cout << form << std::endl;
+		try {
+			form.beSigned(alice);
+		} catch (Form::GradeTooLowException &e) {
+			std::cout << "Alice couldn't sign the form: " << e.what() << std::endl;
+		}
+	}
+	{
+		Bureaucrat bob("Bob", 35);
+		Form form("Form 7", 35, 50);
+		bob.signForm(form);
+		std::cout << form << std::endl;
+	}
+	return 0;
 }

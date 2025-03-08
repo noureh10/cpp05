@@ -14,6 +14,7 @@
 #include "Form.hpp"
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade) {
+	std::cout << "Constructor called" << "\n";
 	if (grade > MIN_GRADE)
 		throw GradeTooLowException();
 	else if (grade < MAX_GRADE)
@@ -21,7 +22,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& copy) : _name(copy._name), _grade(copy._grade) {
-	*this = copy;
+	std::cout << "Copy constructor called" << "\n";
 }
 
 Bureaucrat::~Bureaucrat() {}
@@ -54,11 +55,11 @@ void Bureaucrat::decrementGrade() {
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-	return ("Grade is too high, aborting");
+	return ("Bureaucrat - Grade is too high, aborting");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw () {
-	return ("Grade is too low, aborting");
+	return ("Bureaucrat - Grade is too low, aborting");
 }
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& Bureaucrat) {

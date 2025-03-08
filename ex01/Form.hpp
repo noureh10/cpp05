@@ -23,7 +23,7 @@ class Form {
 		const unsigned int _signature_grade;
 		const unsigned int _execution_grade;
 	public:
-		Form(const std::string name, const unsigned int signature_grade, const unsigned int execution_grade);
+		Form(const std::string name, unsigned int signature_grade, unsigned int execution_grade);
 		Form(const Form &copy);
 		~Form();
 		Form& operator=(const Form& rhs);
