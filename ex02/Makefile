@@ -6,13 +6,13 @@
 #    By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 18:10:38 by nechaara          #+#    #+#              #
-#    Updated: 2024/10/25 17:23:15 by nechaara         ###   ########.fr        #
+#    Updated: 2025/03/08 17:07:50 by nechaara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = form
+NAME = custom_forms
 
-SRCS = main.cpp Bureaucrat.cpp Form.cpp
+SRCS = main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 OBJ_DIR = objects
 FLAGS = -std=c++98 -Wall -Wextra -Werror

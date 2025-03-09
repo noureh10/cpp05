@@ -6,68 +6,47 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:05:38 by nechaara          #+#    #+#             */
-/*   Updated: 2025/01/30 16:16:38 by nechaara         ###   ########.fr       */
+/*   Updated: 2025/03/09 13:04:16 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include <iostream>
 
-int main(void) {
-	{
-		try {
-			Form form("Form 1", 0, 50);
-		} catch (Form::GradeTooHighException &e) {
-			std::cout << "Exception caught: " << e.what() << std::endl;
-		}
+int main() {
+	try {
+		Bureaucrat john("John", 150);
+		Bureaucrat alice("Alice", 44);
+		Bureaucrat zaphod("Zaphod", 1);
+		Bureaucrat henry("Henry", 50);
+
+		ShrubberyCreationForm shrubberyForm("Home");
+		RobotomyRequestForm robotomyForm("Robot");
+		PresidentialPardonForm pardonForm("Criminal");
+		RobotomyRequestForm funkyForm("Funky");
+
+		std::cout << "\nTest signing:" << "\n";
+		john.signForm(shrubberyForm);  // Fail
+		alice.signForm(robotomyForm);  // Should work
+		henry.signForm(funkyForm);	   // Should work
+		zaphod.signForm(pardonForm);   // Should work too
+		
+
+		std::cout << "\nTest executing:" << "\n";
+		john.executeForm(shrubberyForm);  // Fail
+		alice.executeForm(robotomyForm);  // Should work
+		henry.executeForm(funkyForm);	  // Should fail
+		zaphod.executeForm(pardonForm);   // Should work
+
+		std::cout << "\nTest executing unsigned form:" << "\n";
+		Bureaucrat bob("Bob", 25);
+		bob.executeForm(shrubberyForm);  // Not signed
+
+	} catch (const std::exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
 	}
-	{
-		try {
-			Form form("Form 2", 151, 50);
-		} catch (Form::GradeTooLowException &e) {
-			std::cout << "Exception caught: " << e.what() << std::endl;
-		}
-	}
-	{
-		try {
-			Form form("Form 3", 50, 0);
-		} catch (Form::GradeTooHighException &e) {
-			std::cout << "Exception caught: " << e.what() << std::endl;
-		}
-	}
-	{
-		try {
-			Form form("Form 4", 50, 151);
-		} catch (Form::GradeTooLowException &e) {
-			std::cout << "Exception caught: " << e.what() << std::endl;
-		}
-	}
-	{
-		Bureaucrat john("John", 30);
-		Form form("Form 5", 40, 50);
-		std::cout << form << std::endl;
-		try {
-			form.beSigned(john);
-			std::cout << "John successfully signed the form." << std::endl;
-		} catch (Form::GradeTooLowException &e) {
-			std::cout << "John couldn't sign the form: " << e.what() << std::endl;
-		}
-	}
-	{
-		Bureaucrat alice("Alice", 50);
-		Form form("Form 6", 40, 50);
-		std::cout << form << std::endl;
-		try {
-			form.beSigned(alice);
-		} catch (Form::GradeTooLowException &e) {
-			std::cout << "Alice couldn't sign the form: " << e.what() << std::endl;
-		}
-	}
-	{
-		Bureaucrat bob("Bob", 35);
-		Form form("Form 7", 35, 50);
-		bob.signForm(form);
-		std::cout << form << std::endl;
-	}
-	return 0;
+    return (0);
 }

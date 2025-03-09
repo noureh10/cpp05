@@ -6,7 +6,7 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 17:37:36 by nechaara          #+#    #+#             */
-/*   Updated: 2025/03/08 16:51:54 by nechaara         ###   ########.fr       */
+/*   Updated: 2025/03/09 14:48:14 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ std::ostream& operator<<(std::ostream& out, const Form& form) {
 		<< ", Signed: " << (form.getSignature() ? "Yes" : "No")
 		<< ", Required Sign Grade: " << form.getSignatureGrade()
 		<< ", Required Execution Grade: " << form.getExecutionGrade();
-	return out;
+	return (out);
 }

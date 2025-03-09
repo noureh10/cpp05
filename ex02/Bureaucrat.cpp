@@ -6,12 +6,12 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:24:25 by nechaara          #+#    #+#             */
-/*   Updated: 2025/01/30 16:14:02 by nechaara         ###   ########.fr       */
+/*   Updated: 2025/03/09 12:19:02 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade) {
 	std::cout << "Constructor called" << "\n";
@@ -79,12 +79,29 @@ std::string unsignedIntToString(unsigned int num) {
 	return str;
 }
 
-void Bureaucrat::signForm(Form& form) {
+void Bureaucrat::signForm(AForm& form) {
 	try {
 		form.beSigned(*this);
 		std::cout << _name << " signed " << form.getName() << std::endl;
 	} catch (const std::exception& e) {
 		std::cout << _name << " couldn't sign " << form.getName() 
 					<< " because " << e.what() << std::endl;
+	}
+}
+
+void Bureaucrat::executeForm(AForm& form) {
+	std::cout << this->_name << " is executing " << form.getName() << "\n";
+	try {
+		form.execute(*this);
+	} catch (const std::exception &e) {
+		if (!form.isSigned()) {
+			std::cerr 	<< "Form is not signed :/" << "\n";	
+		} else {
+			std::cerr 	<< "Couldn't execute form, here's the requirements next to the bureaucrat grades" << "\n"
+						<< "Bureaucrat Sign grade : " <<  unsignedIntToString(this->getGrade()) << "\n"
+						<< "Form Minimum Sign grade : " << unsignedIntToString(form.getSignatureGrade()) << "\n"
+						<< "Bureaucrat Execution grade : " << unsignedIntToString(this->getGrade()) << "\n"
+						<< "Form Minimum Execution grade : " << unsignedIntToString(form.getExecutionGrade()) << "\n";
+		}
 	}
 }

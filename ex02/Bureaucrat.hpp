@@ -6,18 +6,18 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:09:31 by nechaara          #+#    #+#             */
-/*   Updated: 2025/01/25 15:06:30 by nechaara         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:29:48 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
+class AForm;
 #include <iostream>
 #define MAX_GRADE 1
 #define MIN_GRADE 150
 
-class Form;
 class Bureaucrat {
 	private:
 		const std::string _name;
@@ -32,7 +32,8 @@ class Bureaucrat {
 		unsigned int getGrade(void) const;
 		void incrementGrade(void);
 		void decrementGrade(void);
-		void signForm(Form& form);
+		void signForm(AForm& form);
+		void executeForm(AForm& form);
 		class GradeTooHighException : public std::exception {
 			public:
 				virtual const char* what() const throw();
