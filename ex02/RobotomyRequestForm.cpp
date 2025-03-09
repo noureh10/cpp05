@@ -6,7 +6,7 @@
 /*   By: nechaara <nechaara@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:08:37 by nechaara          #+#    #+#             */
-/*   Updated: 2025/03/08 17:15:05 by nechaara         ###   ########.fr       */
+/*   Updated: 2025/03/09 14:54:35 by nechaara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) :
 	AForm ("RobotomyRequestForm", 72, 45), _target(target) {
-	std::cout << "Presidential Pardon Form constructor called" << "\n";
+	std::cout << "Robotomy Pardon Form constructor called" << "\n";
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy) :
